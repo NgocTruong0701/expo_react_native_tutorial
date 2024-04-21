@@ -1,5 +1,5 @@
 import Colors from "@/constants/Colors";
-import { Link, router } from "expo-router";
+import { Link, router, useSegments } from "expo-router";
 import { Image, StyleSheet, Text, Pressable } from "react-native"
 
 export interface IProduct {
@@ -16,10 +16,14 @@ interface IProductProp {
 export const defaultPizzaImage = 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png';
 
 const ProductListItem = ({ product }: IProductProp) => {
+
+    const segments = useSegments();
+    console.log(segments);
+
     return (
         <Pressable style={styles.container} onPress={() => {
             router.push({
-                pathname: "/product",
+                pathname: `/${segments[0]}/menu/product`,
                 params: {
                     id: product.id,
                 },
